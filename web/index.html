@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proyecto – Métodos Numéricos (Raíces)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Chart.js desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Métodos Numéricos para la Determinación de Raíces</h1>
+      <p class="subtitle">
+        Bisección · Secante · Newton-Raphson – 4 ejercicios, una sola interfaz.
+      </p>
+    </header>
+
+    <section class="panel">
+      <h2>Configuración</h2>
+      <div class="grid-2">
+        <div class="field">
+          <label for="ejercicio">Ejercicio</label>
+          <select id="ejercicio">
+            <option value="ej1">
+              Ejercicio 1 – x³ − e^{0.8x} − 20 = 0
+            </option>
+            <option value="ej2">
+              Ejercicio 2 – 3·sin(0.5x) − 0.5x + 2 = 0
+            </option>
+            <option value="ej3">
+              Ejercicio 3 – x³ − x²e^{−0.5x} − 3x + 1 = 0
+            </option>
+            <option value="ej4">
+              Ejercicio 4 – cos²(x) − 0.5x e^{0.3x} + 5 = 0
+            </option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="metodo">Método</label>
+          <select id="metodo">
+            <option value="biseccion">Bisección</option>
+            <option value="secante">Secante</option>
+            <option value="newton">Newton-Raphson</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Inputs específicos según el método -->
+      <div id="inputs-biseccion" class="grid-2 method-inputs">
+        <div class="field">
+          <label for="a">a (límite inferior)</label>
+          <input type="number" id="a" step="any" placeholder="Ej: 3" />
+        </div>
+        <div class="field">
+          <label for="b">b (límite superior)</label>
+          <input type="number" id="b" step="any" placeholder="Ej: 4" />
+        </div>
+      </div>
+
+      <div id="inputs-secante" class="grid-2 method-inputs hidden">
+        <div class="field">
+          <label for="x0-secante">x₀</label>
+          <input type="number" id="x0-secante" step="any" placeholder="Ej: 3" />
+        </div>
+        <div class="field">
+          <label for="x1-secante">x₁</label>
+          <input type="number" id="x1-secante" step="any" placeholder="Ej: 4" />
+        </div>
+      </div>
+
+      <div id="inputs-newton" class="grid-1 method-inputs hidden">
+        <div class="field">
+          <label for="x0-newton">x₀ (valor inicial)</label>
+          <input type="number" id="x0-newton" step="any" placeholder="Ej: 3.5" />
+        </div>
+      </div>
+
+      <p class="tolerancia">
+        Tolerancia fija: <strong>0.00005</strong> (no modificable).
+      </p>
+
+      <!-- NUEVO: bloque de sugerencias -->
+      <div id="sugerencias" class="sugerencias">
+        <!-- Se rellena dinámicamente desde JS -->
+      </div>
+
+      <div id="mensaje-error" class="mensaje-error"></div>
+
+      <button id="btn-ejecutar">Calcular</button>
+    </section>
+
+    <section class="panel">
+      <h2>Resumen de resultados</h2>
+      <div id="resumen" class="resumen">
+        <!-- Se rellena dinámicamente -->
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Tabla de iteraciones</h2>
+      <div class="table-container">
+        <table id="tabla-iteraciones">
+          <thead>
+            <tr>
+              <th>Iteración</th>
+              <th>xᵢ</th>
+              <th>f(xᵢ)</th>
+              <th>Error absoluto</th>
+              <th>Error relativo</th>
+              <th>Error porcentual (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filas dinámicas -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Gráfica de la función</h2>
+      <canvas id="chart" height="260"></canvas>
+    </section>
+
+    <footer>
+      <p>Proyecto de Métodos Numéricos – Raíces de ecuaciones no lineales.</p>
+    </footer>
+  </div>
+
+  <script src="js/metodos.js"></script>
+</body>
+</html>
